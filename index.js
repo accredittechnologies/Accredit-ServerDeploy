@@ -62,7 +62,7 @@ app.post('/deployserver', (req, res) => {
     }
 
     // Send success message to Telegram
-    const successMessage = `✅ Deployment successful for container ${CONTAINER_NAME}.\nOutput: ${stdout}`;
+    const successMessage = `Deployment successful for container ${CONTAINER_NAME}`;
     sendTelegramMessage(successMessage);
 
     res.send(`✅ Deployment successful:\n${stdout}`);
