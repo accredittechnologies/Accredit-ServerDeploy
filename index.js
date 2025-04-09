@@ -11,12 +11,9 @@ app.get('/', (req, res) => {
 
 app.post('/deployserver', (req, res) => {
   const { digest, name, bot, chatid } = req.body;
-  if (!digest || !digest.startsWith('sha256:')) {
-    return res.status(400).send("❌ Invalid or missing 'digest'");
-  }
 
   const CONTAINER_NAME = name;
-  const FULL_IMAGE = `accredittechnologies/earlywages@${digest}`;
+  const FULL_IMAGE = digest;
   const TELEGRAM_API = `https://api.telegram.org/${bot}/sendMessage`;
   const CHAT_ID = chatid;
 

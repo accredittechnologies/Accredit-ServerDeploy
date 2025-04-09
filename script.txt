@@ -1,1 +1,17 @@
 snap install docker
+apt install nodejs
+y
+y
+y
+apt install npm
+y
+y
+y
+npm i pm2 -g
+git clone https://github.com/accredittechnologies/Accredit-ServerDeploy.git
+cd Accredit-ServerDeploy
+npm i
+pm2 stop 0
+pm2 start index.js
+sudo ufw allow 3001
+sudo ufw allow 32768
