@@ -34,7 +34,6 @@ app.post('/deployserver', (req, res) => {
 
   // Combine cleanup and deployment commands
   const shellCommand = `
-    ${cleanupCommand}
 
     echo "Stopping and removing old container (if exists)...";
     docker stop ${CONTAINER_NAME} 2>/dev/null || true;
@@ -48,6 +47,8 @@ app.post('/deployserver', (req, res) => {
 
     echo "Sending Telegram success message...";
     curl -s -X POST "${TELEGRAM_API}" -d chat_id=${CHAT_ID} -d text="Code Deployed To ${CONTAINER_NAME}";
+
+    ${cleanupCommand}
   `;
 
   exec(shellCommand, (error, stdout, stderr) => {
