@@ -6,11 +6,11 @@ const PORT = 3001;
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send('Server Running');
+  res.send('Deployment Server Running');
 });
 
 app.post('/deployserver', (req, res) => {
-  const { digest,name,bot,chatid } = req.body;
+  const { digest, name, bot, chatid } = req.body;
   if (!digest || !digest.startsWith('sha256:')) {
     return res.status(400).send("❌ Invalid or missing 'digest'");
   }
@@ -20,7 +20,25 @@ app.post('/deployserver', (req, res) => {
   const TELEGRAM_API = `https://api.telegram.org/${bot}/sendMessage`;
   const CHAT_ID = chatid;
 
+  // Cleanup commands
+  const cleanupCommand = `
+    echo "Cleaning up old Docker images...";
+    docker image prune -a -f;
+
+    echo "Cleaning up stopped containers...";
+    docker container prune -f;
+
+    echo "Cleaning up unused volumes...";
+    docker volume prune -f;
+
+    echo "Cleaning up build cache...";
+    docker builder prune -f;
+  `;
+
+  // Combine cleanup and deployment commands
   const shellCommand = `
+    ${cleanupCommand}
+
     echo "Stopping and removing old container (if exists)...";
     docker stop ${CONTAINER_NAME} 2>/dev/null || true;
     docker rm ${CONTAINER_NAME} 2>/dev/null || true;
