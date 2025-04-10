@@ -35,12 +35,12 @@ app.post('/deployserver', (req, res) => {
   // Combine cleanup and deployment commands
   const shellCommand = `
 
+    echo "Pulling image ${FULL_IMAGE}...";
+    docker pull ${FULL_IMAGE} || exit 1;
+
     echo "Stopping and removing old container (if exists)...";
     docker stop ${CONTAINER_NAME} 2>/dev/null || true;
     docker rm ${CONTAINER_NAME} 2>/dev/null || true;
-
-    echo "Pulling image ${FULL_IMAGE}...";
-    docker pull ${FULL_IMAGE} || exit 1;
 
     echo "Running new container from ${FULL_IMAGE}...";
     docker run -d -p 32768:8899 --name ${CONTAINER_NAME} ${FULL_IMAGE} || exit 1;
