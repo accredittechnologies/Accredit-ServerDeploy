@@ -6,6 +6,6 @@ git clone https://github.com/accredittechnologies/Accredit-ServerDeploy.git
 cd Accredit-ServerDeploy
 npm i
 pm2 stop 0
-pm2 start index.js
+pm2 start serdeploy.js
 sudo ufw allow 3005
 sudo ufw allow 32769
