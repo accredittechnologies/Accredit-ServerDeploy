@@ -1,7 +1,7 @@
 const express = require('express');
 const { exec } = require('child_process');
 const app = express();
-const PORT = 3001;
+const PORT = 3003;
 
 app.use(express.json());
 
