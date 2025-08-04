@@ -111,7 +111,7 @@ app.post('/deployaccredit', (req, res) => {
     docker rm ${CONTAINER_NAME} 2>/dev/null || true;
 
     echo "Running new container from ${FULL_IMAGE}...";
-    docker run -d -p 32768:8899 --name ${CONTAINER_NAME} ${FULL_IMAGE} || exit 1;
+    docker run -d -p 32700:3000 --name ${CONTAINER_NAME} ${FULL_IMAGE} || exit 1;
 
     echo "Sending Telegram success message...";
     curl -s -X POST "${TELEGRAM_API}" -d chat_id=${CHAT_ID} -d text="Code Deployed To ${CONTAINER_NAME}";
