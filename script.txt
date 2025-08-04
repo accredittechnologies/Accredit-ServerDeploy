@@ -7,5 +7,5 @@ cd Accredit-ServerDeploy
 npm i
 pm2 stop 0
 pm2 start index.js
-sudo ufw allow 3001
-sudo ufw allow 32768
+sudo ufw allow 3005
+sudo ufw allow 32769
