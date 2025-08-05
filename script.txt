@@ -9,5 +9,9 @@ cd Accredit-ServerDeploy
 npm i
 pm2 stop serdeploy
 pm2 start serdeploy.js
-sudo ufw allow 3005
-sudo ufw allow 32700
+sudo ufw allow 3001
+sudo ufw allow 32701
+sudo ufw allow 32702
+sudo ufw allow 32704
+sudo ufw allow 32705
+sudo ufw allow 32706
