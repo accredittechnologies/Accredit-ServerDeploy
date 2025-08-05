@@ -12,6 +12,9 @@ app.get('/', (req, res) => {
 app.post('/deployserver/:mainport/:port', (req, res) => {
   const { digest, name, bot, chatid } = req.body;
 
+  console.log(req.params.mainport)
+  console.log(req.params.port)
+
   const CONTAINER_NAME = name;
   const FULL_IMAGE = digest;
   const TELEGRAM_API = `https://api.telegram.org/${bot}/sendMessage`;
