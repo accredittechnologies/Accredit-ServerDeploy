@@ -12,6 +12,8 @@ pm2 start serdeploy.js
 sudo ufw allow 3001
 sudo ufw allow 32701
 sudo ufw allow 32702
+sudo ufw allow 32703
 sudo ufw allow 32704
 sudo ufw allow 32705
 sudo ufw allow 32706
+sudo ufw allow 32707
