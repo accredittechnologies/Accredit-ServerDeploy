@@ -37,26 +37,22 @@ app.post('/deployserver/:mainport/:port', (req, res) => {
 
   // Combine cleanup and deployment commands
   const shellCommand = `
-  echo "Pulling image ${FULL_IMAGE}...";
-  docker pull ${FULL_IMAGE} || exit 1;
 
-  echo "Stopping and removing old container (if exists)...";
-  docker stop ${CONTAINER_NAME} 2>/dev/null || true;
-  docker rm ${CONTAINER_NAME} 2>/dev/null || true;
+    echo "Pulling image ${FULL_IMAGE}...";
+    docker pull ${FULL_IMAGE} || exit 1;
 
-  echo "Running new container from ${FULL_IMAGE}...";
-  docker run -d \
-    --env-file /root/.env \
-    -p ${req.params.mainport}:${req.params.port} \
-    --name ${CONTAINER_NAME} \
-    ${FULL_IMAGE} || exit 1;
+    echo "Stopping and removing old container (if exists)...";
+    docker stop ${CONTAINER_NAME} 2>/dev/null || true;
+    docker rm ${CONTAINER_NAME} 2>/dev/null || true;
 
-  echo "Sending Telegram success message...";
-  curl -s -X POST "${TELEGRAM_API}" -d chat_id=${CHAT_ID} -d text="Code Deployed To ${CONTAINER_NAME}";
+    echo "Running new container from ${FULL_IMAGE}...";
+    docker run --env-file /root/.env -d -p ${req.params.mainport}:${req.params.port} --name ${CONTAINER_NAME} ${FULL_IMAGE} || exit 1;
 
-  ${cleanupCommand}
-`;
+    echo "Sending Telegram success message...";
+    curl -s -X POST "${TELEGRAM_API}" -d chat_id=${CHAT_ID} -d text="Code Deployed To ${CONTAINER_NAME}";
 
+    ${cleanupCommand}
+  `;
 
   exec(shellCommand, (error, stdout, stderr) => {
     if (error) {
