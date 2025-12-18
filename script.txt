@@ -2,7 +2,6 @@ snap install docker
 apt install nodejs
 apt install npm
 npm i pm2 -g
-
 rm -rf Accredit-ServerDeploy
 git clone https://github.com/accredittechnologies/Accredit-ServerDeploy.git
 cd Accredit-ServerDeploy

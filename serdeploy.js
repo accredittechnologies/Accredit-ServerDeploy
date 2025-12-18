@@ -11,6 +11,7 @@ app.get('/', (req, res) => {
 
 app.post('/deployserver/:mainport/:port', (req, res) => {
   const { digest, name, bot, chatid } = req.body;
+  console.log({ digest, name, bot, chatid })
 
   console.log(req.params.mainport)
   console.log(req.params.port)
