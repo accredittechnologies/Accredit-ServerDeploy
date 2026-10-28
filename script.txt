@@ -1,13 +1,22 @@
+
+// Reset 
+//reboot
+
 snap install docker
 apt install nodejs
 apt install npm
 npm i pm2 -g
+
+
 rm -rf Accredit-ServerDeploy
 git clone https://github.com/accredittechnologies/Accredit-ServerDeploy.git
 cd Accredit-ServerDeploy
 npm i
 pm2 stop serdeploy
 pm2 start serdeploy.js
+
+
+sudo ufw allow 3000
 sudo ufw allow 3001
 sudo ufw allow 32701
 sudo ufw allow 32702
@@ -16,3 +25,14 @@ sudo ufw allow 32704
 sudo ufw allow 32705
 sudo ufw allow 32706
 sudo ufw allow 32707
+sudo ufw allow 32711
+sudo ufw allow 32712
+sudo ufw allow 32713
+sudo ufw allow 32714
+sudo ufw allow 32715
+sudo ufw allow 32716
+sudo ufw allow 32717
+sudo ufw allow 32718
+sudo ufw allow 32719
+sudo ufw allow 32720
+sudo ufw allow 32768
